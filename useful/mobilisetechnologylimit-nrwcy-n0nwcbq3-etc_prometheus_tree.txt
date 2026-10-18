@@ -1,0 +1,14 @@
+$ ls -R /etc/prometheus/targets
+/etc/prometheus/targets/nodes:
+node_exporter_web.yml
+node_exporter_app.yml
+node_exporter_edge_be          # <- note: no .yml extension
+
+/etc/prometheus/targets/mysql:
+mysqld_core.yml
+
+/etc/prometheus/targets/blackbox:
+probe_endpoints.yml
+
+$ ls /opt/prometheus
+prometheus.yml   prometheus.yml.backup   prometheus.yml.save   # old configs still here

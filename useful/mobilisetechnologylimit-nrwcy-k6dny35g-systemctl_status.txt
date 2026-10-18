@@ -1,0 +1,20 @@
+$ systemctl status mobilise-app
+● mobilise-app.service - Mobilise - Instance1 - Mobilise Springboot core
+     Loaded: loaded (/etc/systemd/system/mobilise-app.service; enabled; preset: enabled)
+     Active: failed (Result: exit-code) since Sun 2026-07-20 09:06:12 UTC; 4min ago
+    Process: 21841 ExecStart=/usr/bin/java -jar /opt/springboot/jar-apps/instance1/mobilise-0.0.1-SNAPSHOT.jar --spring.config.name=application,errorMessages,... (code=exited, status=1/FAILURE)
+   Main PID: 21841 (code=exited, status=1/FAILURE)
+
+$ journalctl -u mobilise-app --since 09:06
+Jul 20 09:06:12 app-host java[21841]: Exception in thread "main" java.lang.UnsupportedClassVersionError:
+Jul 20 09:06:12 app-host java[21841]:   com/mobilise/app/MobiliseApplication has been compiled by a more recent
+Jul 20 09:06:12 app-host java[21841]:   version of the Java Runtime (class file version 65.0), this version of
+Jul 20 09:06:12 app-host java[21841]:   the Java Runtime only recognizes class file versions up to 61.0
+Jul 20 09:06:12 app-host systemd[1]: mobilise-app.service: Main process exited, code=exited, status=1/FAILURE
+Jul 20 09:06:12 app-host systemd[1]: mobilise-app.service: Failed with result 'exit-code'.
+
+$ /usr/bin/java -version
+openjdk version "17.0.12" 2024-07-16
+OpenJDK Runtime Environment (build 17.0.12+7)
+
+# The service jar is built with Java 21 (see environment_overview). /usr/bin/java here is 17.
